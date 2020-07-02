@@ -7,7 +7,7 @@ class CustomPokemon(models.Model):
     residence = models.CharField(verbose_name="Де знайти",max_length = 200)
     description = models.CharField(verbose_name="Опис",max_length = 600)
     catched_up_in = models.DateTimeField(auto_now_add = True)
-    POKEMON_TYPES = (
+    pokemon_types = (
         (1, 'Nature'),
         (2, 'Water'),
         (3, 'Fire'),
@@ -21,11 +21,12 @@ class CustomPokemon(models.Model):
         (11, 'Cosmic'),
         (12, 'Time')
     )
-    EVOLUTION_FORMS = (
+    evolution_forms = (
+        (0, 'non evolving pokemon'),
         (1, '1'),
         (2, '2'),
         (3, '3')
     )
-    pokemon_type = models.IntegerField(verbose_name="Тип покемона", choices=POKEMON_TYPES)
-    evolution_form = models.IntegerField(verbose_name="Форма еволюції", choices=EVOLUTION_FORMS)
+    pokemon_type = models.IntegerField(verbose_name="Тип покемона", choices=pokemon_types)
+    evolution_form = models.IntegerField(verbose_name="Форма еволюції", choices=evolution_forms)
     trainer = models.ForeignKey(User, verbose_name="Тренер", on_delete=models.CASCADE)

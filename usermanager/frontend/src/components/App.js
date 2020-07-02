@@ -1,51 +1,52 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import UserTable from "./table";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 class App extends React.Component {
+    apiURL = "http://localhost:8000/api/pokemons/";
     state = {
-        List: [
-            {
-                id:1,
-                name:"pikatchu",
-                evolution: 1,
-                description: "electro",
-                catched: "27/12/1989"
-            },
-            {
-                id:2,
-                name:"bulbasaur",
-                evolution: 1,
-                description: "nature",
-                catched: "27/12/1989"
-            },
-            {
-                id:3,
-                name:"squirtle",
-                evolution: 1,
-                description: "waterguy",
-                catched: "27/12/1989"
-            },
-            {
-                id:4,
-                name:"charmander",
-                evolution: 1,
-                description: "fire salamander",
-                catched: "27/12/1989"
-            }
-        ]
+        List: [],
     };
+
+    componentDidMount(){
+        this.updateService()
+    }
+
+    updateService(){
+        fetch(this.apiURL)
+        .then((request) => {
+            return request.json();
+        })
+        .then((data) => {
+            this.setState({
+            List: data,
+            });
+        })
+        .catch((err) => console.log(err.message));
+    }
+
+    onDeleteItem = (id) => {
+        fetch(this.apiURL+id, {
+            method: "DELETE",
+        })
+        .then((response) => {
+            this.updateService();
+            console.log(response);
+        })
+        .catch((err) => console.log(err.message)
+        );
+    }
     render() {
     return (
         <div className="outer-container">
             <h1>Pokemons Table</h1>
             <UserTable
                 List={this.state.List}
-            >
-            </UserTable>
+                onDeleteItem={this.onDeleteItem}
+            />
         </div>
     )
   }
 }
-
 ReactDOM.render(<App />, document.getElementById("root"));
