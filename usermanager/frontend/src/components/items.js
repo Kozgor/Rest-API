@@ -7,14 +7,15 @@ class TableItem extends Component {
     pokemon_type: this.props.pokemon_type,
     evolution_form: this.props.evolution_form,
     description: this.props.description,
-    catched_up_in: this.props.catched_up_in,
+    residence: this.props.residence,
   };
   
   render() {
-    const { pokemon_name, evolution_form, description, catched_up_in, pokemon_type} = this.state;
-    const pokemon_types = ['default', 'Nature', 'Water', 'Fire', 'Electricity', 'Earth', 'Air','Telecinesis', 'Darkness', 'Light', 'Ice', 'Cosmic', 'Time'];
+    const {pokemon_name, pokemon_type, evolution_form, description, residence} = this.state;
+    const pokemon_types = ['Nature', 'Water', 'Fire', 'Electricity', 'Earth', 'Air','Telecinesis', 'Darkness', 'Light', 'Ice', 'Cosmic', 'Time'];
+    
     for(let i = 0; i<pokemon_types.length; i++){
-        if(this.props.pokemon_type == i){
+        if(this.props.pokemon_type == i + 1){
             var textify = pokemon_types[i]
         }
     }
@@ -25,6 +26,7 @@ class TableItem extends Component {
     else (evo = this.props.evolution_form)
 
     return (
+      
       <Fragment>
         <tr className="priority-200">
           <td className="name">{pokemon_name}</td>
@@ -32,7 +34,7 @@ class TableItem extends Component {
           </td>
           <td className={textify}>{textify}</td>
           <td className="priority">{description}</td>
-          <td className="impressions">{catched_up_in}</td>
+          <td className="impressions">{residence}</td>
           <td className="delete">
             <button className="edit-btn" onClick={this.props.onEditItem}>
               <i className="fas fa-pencil-alt" title="edit row"></i>
@@ -46,6 +48,6 @@ class TableItem extends Component {
         </tr>
       </Fragment>
     );
-  }
-}
+  };
+};
 export default TableItem;

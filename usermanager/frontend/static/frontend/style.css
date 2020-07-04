@@ -2,6 +2,8 @@
 
 /* START CSS VARIABLES */
 :root {
+  --background-image1:url("images/pikawallpape.jpg");
+  --background-image2:url("images/404.jpg");
   --body-background: #1c223b;
   --body-text: #ffffff;
   --container-background: rgba(39, 51, 73, 0.9);
@@ -20,17 +22,18 @@
 * {
   box-sizing: border-box;
 }
+
 body {
   animation: fadeInPage ease 1.5s; /* fade page in */
   animation-iteration-count: 1; /* fade page in */
   animation-fill-mode: forwards; /* fade page in */
+  background-image:var(--background-image1);
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-image: url("images/pikawallpape.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
   color: var(--body-text);
   font-family: "Open Sans", sans-serif;
   margin: 0;
@@ -178,4 +181,148 @@ table tbody tr:hover .edit-btn {
 } 
 .Time{
   color: goldenrod;
+}
+
+/* ----------------------- */
+
+.btn-div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+.btn-div a, .add-form a{
+  text-decoration: none;
+}
+.btn {
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 45px;
+  padding: 0px 110px;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 100%;
+  border-radius: 0.3125rem;
+}
+.btn:hover {
+  text-decoration: none;
+  text-align: center;
+}
+
+/*btn_background*/
+
+.effect04 {
+  --uismLinkDisplay: var(--smLinkDisplay, inline-flex);
+  display: var(--uismLinkDisplay);
+  color: #151b31;
+  border: solid  1px #ffffff;
+  position: relative;
+  transition-duration: 0.4s;
+  overflow: hidden;
+  border-radius: 0.3125rem;
+}
+.effect04::before,
+.effect04 span{
+  margin: 0 auto;
+  transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+  transition-duration: 0.4s;
+}
+
+/* 文字1を上に */
+.effect04:hover{
+  background-color: #151b31;
+}
+
+/* HOVERしたら文字1を上に */
+.effect04:hover span{
+  -webkit-transform: translateY(-400%) scale(-0.1,20);
+  transform: translateY(-400%) scale(-0.1,20);
+}
+
+/*文字2*/
+.effect04::before{
+  content: attr(data-sm-link-text);
+  color: #FFF;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  -webkit-transform: translateY(500%) scale(-0.1,20);
+  transform: translateY(500%) scale(-0.1,20);
+}
+
+/* HOVERしたら文字2を上に */
+.effect04:hover::before{
+  text-align: center;
+  letter-spacing: 0.05em;
+  -webkit-transform: translateY(0) scale(1,1);
+  transform: translateY(0) scale(1,1);
+}
+
+.add-form {
+  width: 411.86px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  background-color: var(--container-background);
+  border-radius: 0.625rem;
+  box-shadow: 0 5px 10px rgba(12, 16, 31, 0.4);
+  padding: 3.25rem;
+  margin: auto;
+  max-width: 62.5rem;
+}
+.add-form input, .add-form select {
+  width: 246px;
+  padding: 5px;
+  border: solid 0.1px var(--container-background);
+  color: #151b31;
+  border-radius: 5px;
+}
+.add-form label {
+  margin: 10px 0px;
+}
+.add-form div {
+  width: 80%;
+  align-self: center;
+}
+.add-form div button:nth-child(1) {
+  float: right;
+}
+.big-div-form {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-image: var(--background-image2);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.send-form-div {
+  display: flex;
+  flex-wrap: wrap;
+  align-self: flex-end;
+  align-items: space-around;
+  justify-content: center;
+  justify-self: center;
+  padding: 0;
+}
+.send-form-div input {
+  cursor: pointer;
+}
+.send-form-div input:hover {
+  background-color: #151b31;
+  color: white;
+  border: solid  1px #ffffff;
+  border-radius: 0.3125rem;
+  transition: all 0.3s linear;
+}
+.submit-form-btn {
+  margin-top: 40px;
+  margin-bottom: 3px;
 }
