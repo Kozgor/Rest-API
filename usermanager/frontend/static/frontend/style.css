@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
 
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /* START CSS VARIABLES */
 :root {
   --background-image1:url("images/pikawallpape.jpg");
@@ -7,6 +12,7 @@
   --body-background: #1c223b;
   --body-text: #ffffff;
   --container-background: rgba(39, 51, 73, 0.9);
+  --container-background-edit-form: rgba(39, 51, 73, 1);
   --table-background: #1c223b;
   --table-background-hover: #151b31;
   --table-text: #e2e2e2;
@@ -46,6 +52,7 @@ h1 {
 
 /* START OUTER CONTAINER STYLES */
 .outer-container {
+  z-index: 1;
   background-color: var(--container-background);
   border-radius: 0.625rem;
   box-shadow: 0 5px 10px rgba(12, 16, 31, 0.4);
@@ -295,13 +302,11 @@ table tbody tr:hover .edit-btn {
 .add-form div button:nth-child(1) {
   float: right;
 }
-.big-div-form {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
+.first-wallpaper {
+  background-image: var(--background-image1);
+}
+.second-wallpaper {
   background-image: var(--background-image2);
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 .send-form-div {
   display: flex;
@@ -326,3 +331,74 @@ table tbody tr:hover .edit-btn {
   margin-top: 40px;
   margin-bottom: 3px;
 }
+.edit-form-div {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 2;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hidden-edit {
+  position: relative;
+}
+/* close button styles */
+
+.close-btn {
+  background: none;
+  border: 0;
+  box-sizing: border-box;
+  color: transparent;
+  cursor: pointer;
+  font-family: sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  left: 50%;
+  letter-spacing: 1.5px;
+  line-height: 20px;
+  outline: none;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  top: 6%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s ease-in;
+  width: 30px;
+}
+
+.close-btn::before,
+.close-btn::after {
+  background-color: white;
+  content: '';
+  display: block;
+  height: 1px;
+  left: 0;
+  position: absolute;
+  transform-origin: center left;
+  transition: all 0.2s ease-in;
+  width: 50px;
+  z-index: -1;
+}
+
+.close-btn::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.close-btn::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+}
+
+.close-btn:hover {
+  color: #151b31;
+}
+
+.close-btn:hover::before,
+.close-btn:hover::after {
+  height: 50px;
+  transform: rotate(0deg);
+}  

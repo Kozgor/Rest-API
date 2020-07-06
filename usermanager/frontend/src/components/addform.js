@@ -7,31 +7,32 @@ class NewOneForm extends Component {
     this.state = {
       pokemon: "",
       location: "",
-      des: "",
-      typoff: "",
+      descriptions: "",
+      pokemon_type: "",
       evol: "0",
       trainer: "1",
     };
+
     this.onChangePokemon = this.onChangePokemon.bind(this);
     this.onChangeLocation = this.onChangeLocation.bind(this);
-    this.onChangeDes = this.onChangeDes.bind(this);
-    this.onChangeTypoff = this.onChangeTypoff.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangePokemon_type = this.onChangePokemon_type.bind(this);
     this.onChangeEvol = this.onChangeEvol.bind(this);
     this.onChangeTrainer = this.onChangeTrainer.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-
+  
   onChangePokemon(event) {
     this.setState({ pokemon: event.target.value });
   }
   onChangeLocation(event) {
     this.setState({ location: event.target.value });
   }
-  onChangeDes(event) {
-    this.setState({ des: event.target.value });
+  onChangeDescription(event) {
+    this.setState({ descriptions: event.target.value });
   }
-  onChangeTypoff(event) {
-    this.setState({ typoff: event.target.value });
+  onChangePokemon_type(event) {
+    this.setState({ pokemon_type: event.target.value });
   }
   onChangeEvol(event) {
     this.setState({ evol: event.target.value });
@@ -39,6 +40,7 @@ class NewOneForm extends Component {
   onChangeTrainer(event) {
     this.setState({ trainer: event.target.value });
   }
+  
   onSubmit = () => {
     fetch("http://localhost:8000/api/pokemons/", {
       method: "POST",
@@ -49,16 +51,18 @@ class NewOneForm extends Component {
       body: JSON.stringify({
         pokemon_name: this.state.pokemon,
         residence: this.state.location,
-        description: this.state.des,
-        pokemon_type: this.state.typoff,
+        description: this.state.descriptions,
+        pokemon_type: this.state.pokemon_type,
         evolution_form: this.state.evol,
         trainer: this.state.trainer
       }),
     })
       .catch((err) => console.log(err.message));
+      alert(this.state.pokemon +' було додано до колекції!')
   };
-
+  
   render() {
+    document.getElementsByTagName('body')[0].classList.add('second-wallpaper');
     return (
       <Fragment>
       <div className="big-div-form ">
@@ -83,16 +87,16 @@ class NewOneForm extends Component {
           <label>Опис </label>
           <input
             type="text"
-            name="des"
-            value={this.state.des}
-            onChange={this.onChangeDes}
+            name="descriptions"
+            value={this.state.descriptions}
+            onChange={this.onChangeDescription}
           />
 
           <label>Тип покемона </label>
           <select
-            name="typoff"
-            value={this.state.typoff}
-            onChange={this.onChangeTypoff}
+            name="pokemon_type"
+            value={this.state.pokemon_type}
+            onChange={this.onChangePokemon_type}
           >
             <option value="1">Nature</option>
             <option value="2">Water</option>
@@ -128,7 +132,7 @@ class NewOneForm extends Component {
           />
         <div className="send-form-div">
           <input type="submit" value="Додати екземпляр" className="submit-form-btn" />
-          <Link to="/"><input type="button" value="На головну"/></Link>
+          <Link to="/"><input type="button" value="На головну" onClick={this.props.onChangeBackgroundImage}/></Link>
         </div>
         </form>
         </div>

@@ -1,48 +1,54 @@
-import React from 'react';
-import TableItem from './items';
+import React, { Component, Fragment } from "react";
 import {Link} from "react-router-dom";
 
-const UserTable = ({List, onDeleteItem}) => {
-    const item = List.map(item => {
-        return (<TableItem
-            key = {item.id}
-            id = {item.id}
-            pokemon_name = {item.pokemon_name}
-            residence = {item.residence}
-            pokemon_type = {item.pokemon_type}
-            evolution_form = {item.evolution_form}
-            description = {item.description}
-            catched_up_in = {item.catched_up_in}
-            onDeleteItem = {() => onDeleteItem(item.id)}
-        />
-        );  
-    });
+class TableItem extends Component {
+  state = {
+    id: this.props.id,
+    pokemon_name: this.props.pokemon_name,
+    pokemon_type: this.props.pokemon_type,
+    evolution_form: this.props.evolution_form,
+    description: this.props.description,
+    residence: this.props.residence,
+  };
+  render() {
+    const { pokemon_name, pokemon_type, evolution_form, description, residence} = this.state;
+    const pokemon_types = ['Nature', 'Water', 'Fire', 'Electricity', 'Earth', 'Air','Telecinesis', 'Darkness', 'Light', 'Ice', 'Cosmic', 'Time'];
+    
+    for(let i = 0; i<pokemon_types.length; i++){
+        if(this.props.pokemon_type == i + 1){
+            var textify = pokemon_types[i]
+        }
+    }
 
+    if (this.props.evolution_form == 0){
+        var evo = 'N/E'
+    }
+    else (evo = this.props.evolution_form);
+    
+    
     return (
-        <div className="outer-container">
-            <h1>Pokemons Table</h1>
-            <div className="btn-div">
-                <Link to='/add'>
-                    <button className="btn effect04" data-sm-link-text="CLICK" target="_blank"><span>Add</span></button>
-                </Link>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Pokemon</th>
-                        <th>Evo</th>
-                        <th>Type</th>
-                        <th>Description</th>
-                        <th>Live in</th>
-                        <th>Edit</th>
-                        <th>Del</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {item}
-                </tbody>
-            </table>
-        </div>
-    )
+      <Fragment>
+        <tr className="priority-200">
+          <td className="name">{pokemon_name}</td>
+          <td className="delete">{evo}</td>
+          <td className={textify}>{textify}</td>
+          <td className="priority">{description}</td>
+          <td className="impressions">{residence}</td>
+          <td className="delete">
+          <Link to='/edit'>
+            <button className="edit-btn" onClick={this.props.onEditItem}>
+              <i className="fas fa-pencil-alt" title="edit row"></i>
+            </button>
+          </Link>
+          </td>
+          <td className="delete">
+            <button className="delete-btn" onClick={this.props.onDeleteItem}>
+              <i className="fas fa-trash-alt" title="delete row"></i>
+            </button>
+          </td>
+        </tr>
+      </Fragment>
+    );
+  };
 };
-export default UserTable;
+export default TableItem;
